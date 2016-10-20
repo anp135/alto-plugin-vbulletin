@@ -18,7 +18,7 @@ class PluginVbulletin_ModuleUser_MapperUser extends PluginVbulletin_Inherit_Modu
 			FROM
 				?_user as u
 				LEFT JOIN ?_adminban AS ab ON u.user_id=ab.user_id AND ab.banactive=1
-				LEFT JOIN " . Config::Get('plugin.vbulletin.db') . ".forum_user as forum ON forum.username = u.user_login
+				LEFT JOIN " . Config::Get('plugin.vbulletin.db') . "." . Config::Get('plugin.vbulletin.table_prefix') . "user as forum ON forum.username = u.user_login
 			WHERE
 				u.user_id IN(?a)
 			LIMIT ?d
