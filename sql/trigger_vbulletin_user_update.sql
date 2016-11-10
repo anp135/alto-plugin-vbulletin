@@ -12,8 +12,7 @@ CREATE TRIGGER `vbulletin-3.8.7`.`vb_user_update` BEFORE UPDATE ON `vb_user`
 
  -- need deactivate
  IF (NEW.usergroupid = 1 || NEW.usergroupid = 3 || NEW.usergroupid = 4 || NEW.usergroupid = 8) AND (OLD.usergroupid <> 1 AND OLD.usergroupid <> 3 AND OLD.usergroupid <> 4 AND OLD.usergroupid <> 8) THEN
-  CALL replicate_vb_user(OLD.username, OLD.password,OLD.email, OLD.homepage, OLD.icq, OLD.skype, OLD.joindate, OLD.lastvisit, OLD.lastactivity, OLD.lastpost, OLD.timezoneoffset, OLD.showbirthday, OLD
-.birthday, OLD.ipaddress, OLD.salt);
+  -- CALL replicate_vb_user(OLD.username, OLD.password,OLD.email, OLD.homepage, OLD.icq, OLD.skype, OLD.joindate, OLD.lastvisit, OLD.lastactivity, OLD.lastpost, OLD.timezoneoffset, OLD.showbirthday, OLD.birthday, OLD.ipaddress, OLD.salt);
  UPDATE `alto_1.1.19`.prefix_user SET user_activate = 0 WHERE user_login = OLD.username;
  END IF;
 

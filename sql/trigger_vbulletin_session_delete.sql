@@ -1,5 +1,5 @@
-CREATE TRIGGER `vbulletin-3.8.7`.``vb_session_delete` BEFORE DELETE ON `vb_session`
- FOR EACH ROW run: BEGIN
+CREATE TRIGGER `vbulletin-3.8.7`.`vb_session_delete` BEFORE DELETE ON `vb_session` FOR EACH ROW
+run: BEGIN
  DECLARE alto_user_id integer DEFAULT NULL;
  DECLARE group_id integer DEFAULT NULL;
  IF OLD.userid = 1 OR OLD.useragent LIKE 'alto%' THEN
@@ -19,4 +19,4 @@ CREATE TRIGGER `vbulletin-3.8.7`.``vb_session_delete` BEFORE DELETE ON `vb_sessi
       session_key = OLD.sessionhash AND
       user_id = alto_user_id AND
       session_exit IS NULL;
-END
+END;

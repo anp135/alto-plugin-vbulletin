@@ -38,6 +38,12 @@ class PluginVbulletin extends Plugin {
                 $aErrors[] = $this->GetLastError();
                 return false;
             }
+            $sFileQuery = file_get_contents(__DIR__ . '/sql/trigger_vbulletin_session_delete.sql');
+            $bResult = E::ModuleDatabase()->GetConnect()->query($sFileQuery);
+            if ($bResult === false) {
+                $aErrors[] = $this->GetLastError();
+                return false;
+            }
             return true;
         }
 
