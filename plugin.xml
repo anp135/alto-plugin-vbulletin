@@ -7,7 +7,7 @@
         <author>
                 <lang name="default">135</lang>
         </author>
-        <homepage>http://4x4krasnodar.ru/</homepage>
+        <homepage>https://github.com/anp135/alto-plugin-vbulletin</homepage>
         <version>1.0</version>
         <requires>
                 <alto>1.1.x</alto>

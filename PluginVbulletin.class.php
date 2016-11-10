@@ -20,7 +20,31 @@ class PluginVbulletin extends Plugin {
         );
 
         public function Activate() {
-                return true;
+            $sFileQuery = file_get_contents(__DIR__ . '/sql/trigger_alto_session_insert.sql');
+            $bResult = E::ModuleDatabase()->GetConnect()->query($sFileQuery);
+            if ($bResult === false) {
+                $aErrors[] = $this->GetLastError();
+                return false;
+            }
+            $sFileQuery = file_get_contents(__DIR__ . '/sql/trigger_alto_session_update.sql');
+            $bResult = E::ModuleDatabase()->GetConnect()->query($sFileQuery);
+            if ($bResult === false) {
+                $aErrors[] = $this->GetLastError();
+                return false;
+            }
+            $sFileQuery = file_get_contents(__DIR__ . '/sql/trigger_vbulletin_session_insert.sql');
+            $bResult = E::ModuleDatabase()->GetConnect()->query($sFileQuery);
+            if ($bResult === false) {
+                $aErrors[] = $this->GetLastError();
+                return false;
+            }
+            $sFileQuery = file_get_contents(__DIR__ . '/sql/trigger_vbulletin_session_delete.sql');
+            $bResult = E::ModuleDatabase()->GetConnect()->query($sFileQuery);
+            if ($bResult === false) {
+                $aErrors[] = $this->GetLastError();
+                return false;
+            }
+            return true;
         }
 
         public function Init() {
@@ -28,6 +52,7 @@ class PluginVbulletin extends Plugin {
         }
 
         public function Deactivate() {
+            $this->ExportSQL(__DIR__ . '/sql/deactivate.sql');
                 return true;
         }
 }
